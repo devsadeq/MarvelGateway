@@ -112,4 +112,5 @@ dependencies {
     ksp(libs.androidx.room.compiler)
     implementation(libs.navigation.compose)
     implementation(libs.koltinx.serialization.json)
+    implementation(libs.coil)
 }

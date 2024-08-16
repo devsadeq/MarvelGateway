@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MarvelGateway</string>
+    <string name="marvel_logo">Marvel Logo</string>
+    <string name="search_for_marvel_characters">Search for marvel characters</string>
 </resources>

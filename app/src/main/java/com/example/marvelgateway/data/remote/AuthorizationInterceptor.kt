@@ -10,7 +10,7 @@ import javax.inject.Singleton
 class AuthorizationInterceptor @Inject constructor() : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
-        val newUrl = request.url().newBuilder()
+        val newUrl = request.url.newBuilder()
             .addQueryParameter("ts", "1")
             .addQueryParameter("apikey", BuildConfig.MARVEL_PUBLIC_API_KEY)
             .addQueryParameter("hash", BuildConfig.MARVEL_HASH)

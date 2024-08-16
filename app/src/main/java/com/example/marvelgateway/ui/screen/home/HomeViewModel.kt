@@ -7,6 +7,7 @@ import com.example.marvelgateway.ui.screen.base.ErrorState
 import com.example.marvelgateway.ui.screen.base.Stateful
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,12 +17,11 @@ class HomeViewModel @Inject constructor(
     BaseViewModel<HomeUIEffect>(), Stateful<HomeUIState>, HomeInteractionListener {
     override val uiState = MutableStateFlow(HomeUIState())
 
-
     private fun onError(error: ErrorState) {
         Log.e(TAG, "onError: ")
     }
 
-    override fun getCharacters() {
+    fun getCharacters() {
         tryToExecute(
             {
                 manageCharacter.getCharacters(
@@ -38,5 +38,13 @@ class HomeViewModel @Inject constructor(
 
     companion object {
         private const val TAG = "HomeViewModel"
+    }
+
+    override fun onSectionClicked(section: HomeUIState.HomeSection) {
+        Log.d(TAG, "onSectionClicked: $section")
+    }
+
+    override fun onSearchCharacterClicked() {
+        Log.d(TAG, "onSearchCharacterClicked: ")
     }
 }
