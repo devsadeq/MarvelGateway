@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -26,6 +29,22 @@ android {
         room {
             schemaDirectory("$projectDir/schemas")
         }
+
+        buildConfigField(
+            "String",
+            "MARVEL_API_BASE_URL",
+            "\"${getSecrets("MARVEL_API_BASE_URL")}\""
+        )
+        buildConfigField(
+            "String",
+            "MARVEL_PUBLIC_API_KEY",
+            "\"${getSecrets("MARVEL_PUBLIC_API_KEY")}\""
+        )
+        buildConfigField(
+            "String",
+            "MARVEL_HASH",
+            "\"${getSecrets("MARVEL_HASH")}\""
+        )
     }
 
     buildTypes {
@@ -46,6 +65,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -55,6 +75,12 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+}
+
+fun getSecrets(key: String): String {
+    val properties = Properties()
+    properties.load(FileInputStream("local.properties"))
+    return properties.getProperty(key)
 }
 
 dependencies {
