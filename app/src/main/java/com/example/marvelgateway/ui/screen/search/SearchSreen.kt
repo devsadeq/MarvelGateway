@@ -54,7 +54,12 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.marvelgateway.R
+import com.example.marvelgateway.ViewAllScreenRoute
 import com.example.marvelgateway.ui.screen.base.CollectUIEffect
+import com.example.marvelgateway.ui.screen.viewAll.ViewAllUIState.Companion.CONTENT_TYPE_CHARACTER_COMICS
+import com.example.marvelgateway.ui.screen.viewAll.ViewAllUIState.Companion.CONTENT_TYPE_CHARACTER_EVENTS
+import com.example.marvelgateway.ui.screen.viewAll.ViewAllUIState.Companion.CONTENT_TYPE_CHARACTER_SERIES
+import com.example.marvelgateway.ui.screen.viewAll.ViewAllUIState.Companion.CONTENT_TYPE_CHARACTER_STORIES
 
 @Composable
 fun SearchScreen(
@@ -66,6 +71,9 @@ fun SearchScreen(
     CollectUIEffect(uiEffect = viewModel.uiEffect) {
         when (it) {
             is SearchUIEffect.BackToHomeScreen -> navController.popBackStack()
+            is SearchUIEffect.NavigateToViewAllScreen -> {
+                navController.navigate(ViewAllScreenRoute(it.contentType, it.characterId))
+            }
         }
     }
 
@@ -145,7 +153,9 @@ private fun SearchScreenContent(
                         title = "Comics",
                         items = uiState.comics,
                         onItemClicked = {},
-                        onViewAllClicked = {},
+                        onViewAllClicked = {
+                            interactionListener.onViewAllClicked(CONTENT_TYPE_CHARACTER_COMICS)
+                        },
                     )
                 }
             }
@@ -155,7 +165,9 @@ private fun SearchScreenContent(
                         title = "Series",
                         items = uiState.series,
                         onItemClicked = {},
-                        onViewAllClicked = {},
+                        onViewAllClicked = {
+                            interactionListener.onViewAllClicked(CONTENT_TYPE_CHARACTER_SERIES)
+                        },
                     )
                 }
             }
@@ -165,7 +177,9 @@ private fun SearchScreenContent(
                         title = "Events",
                         items = uiState.events,
                         onItemClicked = {},
-                        onViewAllClicked = {},
+                        onViewAllClicked = {
+                            interactionListener.onViewAllClicked(CONTENT_TYPE_CHARACTER_EVENTS)
+                        },
                     )
                 }
             }
@@ -175,7 +189,9 @@ private fun SearchScreenContent(
                         title = "Stories",
                         items = uiState.stories,
                         onItemClicked = {},
-                        onViewAllClicked = {},
+                        onViewAllClicked = {
+                            interactionListener.onViewAllClicked(CONTENT_TYPE_CHARACTER_STORIES)
+                        },
                     )
                 }
             }

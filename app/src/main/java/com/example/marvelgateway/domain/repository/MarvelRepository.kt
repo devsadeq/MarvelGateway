@@ -39,4 +39,32 @@ interface MarvelRepository {
         limit: Int,
         offset: Int
     ): List<Story>
+
+    suspend fun getComics(
+        title: String?,
+        titleStartsWith: String?,
+        limit: Int?,
+        offset: Int?
+    ): List<Comic>
+
+    suspend fun getSeries(
+        title: String?,
+        titleStartsWith: String?,
+        limit: Int?,
+        offset: Int?
+    ): List<Series>
+
+    suspend fun getEvents(
+        title: String?,
+        titleStartsWith: String?,
+        limit: Int?,
+        offset: Int?
+    ): List<Event>
+
+    suspend fun getStories(
+        title: String?,
+        titleStartsWith: String?,
+        limit: Int?,
+        offset: Int?
+    ): List<Story>
 }

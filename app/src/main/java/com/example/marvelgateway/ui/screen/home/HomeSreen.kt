@@ -53,6 +53,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.marvelgateway.R
 import com.example.marvelgateway.SearchScreenRoute
+import com.example.marvelgateway.ViewAllScreenRoute
 import com.example.marvelgateway.ui.screen.base.CollectUIEffect
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -85,6 +86,10 @@ fun HomeScreen(
         when (it) {
             is HomeUIEffect.NavigateToCharacterSearchScreen -> {
                 navController.navigate(SearchScreenRoute)
+            }
+
+            is HomeUIEffect.NavigateToViewAllScreen -> {
+                navController.navigate(ViewAllScreenRoute(it.type))
             }
         }
     }

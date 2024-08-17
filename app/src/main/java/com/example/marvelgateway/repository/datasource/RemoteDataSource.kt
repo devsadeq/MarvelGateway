@@ -42,4 +42,32 @@ interface RemoteDataSource {
         offset: Int
     ): List<StoryResponse>
 
+    suspend fun getComics(
+        title: String?,
+        titleStartsWith: String?,
+        limit: Int?,
+        offset: Int?
+    ): List<ComicResponse>
+
+    suspend fun getSeries(
+        title: String?,
+        titleStartsWith: String?,
+        limit: Int?,
+        offset: Int?
+    ): List<SeriesResponse>
+
+    suspend fun getEvents(
+        title: String?,
+        titleStartsWith: String?,
+        limit: Int?,
+        offset: Int?
+    ): List<EventResponse>
+
+    suspend fun getStories(
+        title: String?,
+        titleStartsWith: String?,
+        limit: Int?,
+        offset: Int?
+    ): List<StoryResponse>
+
 }

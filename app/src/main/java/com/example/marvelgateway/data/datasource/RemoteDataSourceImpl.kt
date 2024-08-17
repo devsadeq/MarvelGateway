@@ -72,6 +72,50 @@ class RemoteDataSourceImpl @Inject constructor(
         }
     }
 
+    override suspend fun getComics(
+        title: String?,
+        titleStartsWith: String?,
+        limit: Int?,
+        offset: Int?
+    ): List<ComicResponse> {
+        return tryToExecute {
+            marvelApiService.getComics(title, titleStartsWith, limit, offset)
+        }
+    }
+
+    override suspend fun getSeries(
+        title: String?,
+        titleStartsWith: String?,
+        limit: Int?,
+        offset: Int?
+    ): List<SeriesResponse> {
+        return tryToExecute {
+            marvelApiService.getSeries(title, titleStartsWith, limit, offset)
+        }
+    }
+
+    override suspend fun getEvents(
+        title: String?,
+        titleStartsWith: String?,
+        limit: Int?,
+        offset: Int?
+    ): List<EventResponse> {
+        return tryToExecute {
+            marvelApiService.getEvents(title, titleStartsWith, limit, offset)
+        }
+    }
+
+    override suspend fun getStories(
+        title: String?,
+        titleStartsWith: String?,
+        limit: Int?,
+        offset: Int?
+    ): List<StoryResponse> {
+        return tryToExecute {
+            marvelApiService.getStories(title, titleStartsWith, limit, offset)
+        }
+    }
+
     private suspend fun <T> tryToExecute(func: suspend () -> Response<MarvelResponse<T>>): List<T> {
         val response = func()
         Log.d("TAG", "tryToExecute: ${response.code()}")

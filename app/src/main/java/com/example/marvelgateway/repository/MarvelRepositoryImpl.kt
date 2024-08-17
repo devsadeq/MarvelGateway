@@ -58,4 +58,40 @@ class MarvelRepositoryImpl @Inject constructor(
     ): List<Story> {
         return remoteDatasource.getCharacterStories(characterId, limit, offset).toEntity()
     }
+
+    override suspend fun getComics(
+        title: String?,
+        titleStartsWith: String?,
+        limit: Int?,
+        offset: Int?
+    ): List<Comic> {
+        return remoteDatasource.getComics(title, titleStartsWith, limit, offset).toEntity()
+    }
+
+    override suspend fun getSeries(
+        title: String?,
+        titleStartsWith: String?,
+        limit: Int?,
+        offset: Int?
+    ): List<Series> {
+        return remoteDatasource.getSeries(title, titleStartsWith, limit, offset).toEntity()
+    }
+
+    override suspend fun getEvents(
+        title: String?,
+        titleStartsWith: String?,
+        limit: Int?,
+        offset: Int?
+    ): List<Event> {
+        return remoteDatasource.getEvents(title, titleStartsWith, limit, offset).toEntity()
+    }
+
+    override suspend fun getStories(
+        title: String?,
+        titleStartsWith: String?,
+        limit: Int?,
+        offset: Int?
+    ): List<Story> {
+        return remoteDatasource.getStories(title, titleStartsWith, limit, offset).toEntity()
+    }
 }

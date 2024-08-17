@@ -7,4 +7,5 @@ interface SearchInteractionListener : BaseInteractionListener {
     fun onCloseSearch()
     fun onSearchClicked()
     fun onSuggestionClicked(suggestion: SearchUIState.Suggestion)
+    fun onViewAllClicked(contentType: String)
 }

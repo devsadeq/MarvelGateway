@@ -17,6 +17,7 @@ class HomeViewModel @Inject constructor() :
 
     override fun onSectionClicked(section: HomeUIState.HomeSection) {
         Log.d(TAG, "onSectionClicked: $section")
+        sendUiEffect(HomeUIEffect.NavigateToViewAllScreen(section.title))
     }
 
     override fun onSearchCharacterClicked() {

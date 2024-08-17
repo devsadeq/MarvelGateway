@@ -54,4 +54,35 @@ interface MarvelApiService {
         @Query("offset") offset: Int? = null
     ): Response<MarvelResponse<StoryResponse>>
 
+    @GET("comics")
+    suspend fun getComics(
+        @Query("title") title: String? = null,
+        @Query("titleStartsWith") titleStartsWith: String? = null,
+        @Query("limit") limit: Int? = null,
+        @Query("offset") offset: Int? = null
+    ): Response<MarvelResponse<ComicResponse>>
+
+    @GET("series")
+    suspend fun getSeries(
+        @Query("title") title: String? = null,
+        @Query("titleStartsWith") titleStartsWith: String? = null,
+        @Query("limit") limit: Int? = null,
+        @Query("offset") offset: Int? = null
+    ): Response<MarvelResponse<SeriesResponse>>
+
+    @GET("events")
+    suspend fun getEvents(
+        @Query("name") name: String? = null,
+        @Query("nameStartsWith") nameStartsWith: String? = null,
+        @Query("limit") limit: Int? = null,
+        @Query("offset") offset: Int? = null
+    ): Response<MarvelResponse<EventResponse>>
+
+    @GET("stories")
+    suspend fun getStories(
+        @Query("title") title: String? = null,
+        @Query("titleStartsWith") titleStartsWith: String? = null,
+        @Query("limit") limit: Int? = null,
+        @Query("offset") offset: Int? = null
+    ): Response<MarvelResponse<StoryResponse>>
 }

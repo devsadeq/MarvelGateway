@@ -59,9 +59,19 @@ class SearchViewModel @Inject constructor(
         }
     }
 
+    override fun onViewAllClicked(contentType: String) {
+        Log.d(TAG, "onViewAllClicked: ")
+        sendUiEffect(
+            SearchUIEffect.NavigateToViewAllScreen(
+                contentType,
+                uiState.value.character.id.toInt()
+            )
+        )
+    }
+
     private fun lunchSearchJob() {
         searchJob?.cancel()
-        searchJob = launchDelayed(300L) {
+        searchJob = launchDelayed(500L) {
             getSearchSuggestions()
         }
     }
@@ -120,7 +130,7 @@ class SearchViewModel @Inject constructor(
     private fun getCharacterComics() {
         Log.d(TAG, "getCharacterComics: ")
         tryToExecute(
-            { manageCharacter.getCharacterComics(uiState.value.character.id.toInt(), 10, 0) },
+            { manageCharacter.getCharacterComics(uiState.value.character.id.toInt(), 5, 0) },
             onError = ::onError,
             onSuccess = ::onComicsLoadedSuccessfully
         )
@@ -139,7 +149,7 @@ class SearchViewModel @Inject constructor(
     private fun getCharacterSeries() {
         Log.d(TAG, "getCharacterSeries: ")
         tryToExecute(
-            { manageCharacter.getCharacterSeries(uiState.value.character.id.toInt(), 10, 0) },
+            { manageCharacter.getCharacterSeries(uiState.value.character.id.toInt(), 5, 0) },
             onError = ::onError,
             onSuccess = ::onSeriesLoadedSuccessfully
         )
@@ -158,7 +168,7 @@ class SearchViewModel @Inject constructor(
     private fun getCharacterEvents() {
         Log.d(TAG, "getCharacterEvents: ")
         tryToExecute(
-            { manageCharacter.getCharacterEvents(uiState.value.character.id.toInt(), 10, 0) },
+            { manageCharacter.getCharacterEvents(uiState.value.character.id.toInt(), 5, 0) },
             onError = ::onError,
             onSuccess = ::onEventsLoadedSuccessfully
         )
@@ -177,7 +187,7 @@ class SearchViewModel @Inject constructor(
     private fun getCharacterStories() {
         Log.d(TAG, "getCharacterStories: ")
         tryToExecute(
-            { manageCharacter.getCharacterStories(uiState.value.character.id.toInt(), 10, 0) },
+            { manageCharacter.getCharacterStories(uiState.value.character.id.toInt(), 5, 0) },
             onError = ::onError,
             onSuccess = ::onStoriesLoadedSuccessfully
         )
