@@ -17,7 +17,7 @@ data class ComicResponse(
     val id: String?,
     @SerializedName("modified")
     val modified: String?,
-    @SerializedName("name")
+    @SerializedName("title")
     val name: String?,
     @SerializedName("resourceURI")
     val resourceURI: String?,
