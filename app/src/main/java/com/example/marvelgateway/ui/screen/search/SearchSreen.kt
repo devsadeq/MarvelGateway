@@ -313,11 +313,17 @@ private fun RelatedSection(
                 text = title,
                 style = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.Medium)
             )
-            Text(
-                text = stringResource(R.string.view_all),
-                style = TextStyle(fontSize = 12.sp, color = Color.Gray),
-                modifier = Modifier.clickable { onViewAllClicked(title) }
-            )
+            Box(
+                modifier = Modifier
+                    .clip(shape = RoundedCornerShape(4.dp))
+                    .clickable { onViewAllClicked(title) }
+            ) {
+                Text(
+                    modifier = Modifier.padding(4.dp),
+                    text = stringResource(R.string.view_all),
+                    style = TextStyle(fontSize = 12.sp, color = Color.Gray),
+                )
+            }
         }
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
