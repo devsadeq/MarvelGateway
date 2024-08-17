@@ -41,6 +41,7 @@ class SearchViewModel @Inject constructor(
 
     override fun onCloseSearch() {
         Log.d(TAG, "onCloseSearch: ")
+        sendUiEffect(SearchUIEffect.BackToHomeScreen)
     }
 
     override fun onSearchClicked() {

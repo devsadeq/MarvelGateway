@@ -64,7 +64,9 @@ fun SearchScreen(
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
     CollectUIEffect(uiEffect = viewModel.uiEffect) {
-        // TODO: Handle UI effects
+        when (it) {
+            is SearchUIEffect.BackToHomeScreen -> navController.popBackStack()
+        }
     }
 
     SearchScreenContent(

@@ -14,7 +14,7 @@ fun MarvelNavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = SearchScreenRoute
+        startDestination = HomeScreenRoute
     ) {
         composable<HomeScreenRoute> {
             HomeScreen(navController = navController)
