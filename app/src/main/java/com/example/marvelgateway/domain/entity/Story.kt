@@ -1,8 +1,8 @@
 package com.example.marvelgateway.domain.entity
 
-data class Character(
+data class Story(
     val id: String,
-    val name: String,
+    val title: String,
     val description: String,
     val thumbnail: String,
 )

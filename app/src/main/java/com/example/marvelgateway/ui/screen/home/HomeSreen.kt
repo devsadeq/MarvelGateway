@@ -26,10 +26,8 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CardDefaults
@@ -53,8 +51,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import coil.compose.AsyncImage
 import com.example.marvelgateway.R
+import com.example.marvelgateway.SearchScreenRoute
 import com.example.marvelgateway.ui.screen.base.CollectUIEffect
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -83,7 +81,13 @@ fun HomeScreen(
         }
     }
 
-    CollectUIEffect(uiEffect = viewModel.uiEffect) {}
+    CollectUIEffect(uiEffect = viewModel.uiEffect) {
+        when (it) {
+            is HomeUIEffect.NavigateToCharacterSearchScreen -> {
+                navController.navigate(SearchScreenRoute)
+            }
+        }
+    }
 
     HomeScreenContent(
         uiState = uiState.value,
@@ -182,11 +186,11 @@ private fun MarvelSection(
     ) {
         Image(
             modifier = Modifier
-                .height(100.dp)
+                .height(85.dp)
                 .fillMaxWidth(),
             painter = painterResource(id = section.coverImage),
             contentDescription = null,
-            contentScale = ContentScale.FillBounds
+            contentScale = ContentScale.Crop,
         )
         Text(
             text = section.title,

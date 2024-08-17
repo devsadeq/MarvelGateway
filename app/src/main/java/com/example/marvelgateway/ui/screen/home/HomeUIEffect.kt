@@ -4,4 +4,5 @@ import com.example.marvelgateway.ui.screen.base.UIEffect
 
 
 interface HomeUIEffect : UIEffect {
+    object NavigateToCharacterSearchScreen : HomeUIEffect
 }

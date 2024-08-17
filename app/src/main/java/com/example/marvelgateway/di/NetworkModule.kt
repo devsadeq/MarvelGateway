@@ -40,7 +40,7 @@ object NetworkModule {
     fun provideOkHttpClient(authInterceptor: AuthorizationInterceptor): OkHttpClient {
         return OkHttpClient().newBuilder()
             .addInterceptor(authInterceptor)
-            .readTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
+            .readTimeout(60, java.util.concurrent.TimeUnit.SECONDS)
             .build()
     }
 

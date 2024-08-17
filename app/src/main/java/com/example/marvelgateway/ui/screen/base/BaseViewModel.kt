@@ -6,6 +6,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -85,6 +86,17 @@ abstract class BaseViewModel<E> : ViewModel() {
                     emit(value)
                 }
             }
+        }
+    }
+
+    protected fun launchDelayed(
+        duration: Long,
+        scope: CoroutineScope = viewModelScope,
+        block: suspend CoroutineScope.() -> Unit,
+    ): Job {
+        return scope.launch(Dispatchers.IO) {
+            delay(duration)
+            block()
         }
     }
 }

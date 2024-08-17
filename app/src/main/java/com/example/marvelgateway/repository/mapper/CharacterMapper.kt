@@ -7,7 +7,7 @@ fun CharacterResponse.toEntity() = Character(
     id = id ?: "",
     name = name ?: "",
     description = description ?: "",
-    thumbnail = "${thumbnail?.path}.${thumbnail?.extension}"
+    thumbnail = "${thumbnail?.path}.${thumbnail?.extension}",
 )
 
 fun List<CharacterResponse>.toEntity() = map { it.toEntity() }

@@ -11,34 +11,9 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
-    private val manageCharacter: ManageCharacterUseCase
-) :
+class HomeViewModel @Inject constructor() :
     BaseViewModel<HomeUIEffect>(), Stateful<HomeUIState>, HomeInteractionListener {
     override val uiState = MutableStateFlow(HomeUIState())
-
-    private fun onError(error: ErrorState) {
-        Log.e(TAG, "onError: ")
-    }
-
-    fun getCharacters() {
-        tryToExecute(
-            {
-                manageCharacter.getCharacters(
-                    limit = 5,
-                    offset = 0
-                )
-            },
-            onError = ::onError,
-            onSuccess = {
-                Log.d(TAG, "init: $it")
-            }
-        )
-    }
-
-    companion object {
-        private const val TAG = "HomeViewModel"
-    }
 
     override fun onSectionClicked(section: HomeUIState.HomeSection) {
         Log.d(TAG, "onSectionClicked: $section")
@@ -46,5 +21,14 @@ class HomeViewModel @Inject constructor(
 
     override fun onSearchCharacterClicked() {
         Log.d(TAG, "onSearchCharacterClicked: ")
+        sendUiEffect(HomeUIEffect.NavigateToCharacterSearchScreen)
+    }
+
+    private fun onError(error: ErrorState) {
+        Log.e(TAG, "onError: ")
+    }
+
+    companion object {
+        private const val TAG = "HomeViewModel"
     }
 }

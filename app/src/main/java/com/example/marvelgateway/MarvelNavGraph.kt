@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.marvelgateway.ui.screen.home.HomeScreen
+import com.example.marvelgateway.ui.screen.search.SearchScreen
 import kotlinx.serialization.Serializable
 
 @Composable
@@ -13,13 +14,19 @@ fun MarvelNavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = HomeScreenRoute
+        startDestination = SearchScreenRoute
     ) {
         composable<HomeScreenRoute> {
             HomeScreen(navController = navController)
+        }
+        composable<SearchScreenRoute> {
+            SearchScreen(navController = navController)
         }
     }
 }
 
 @Serializable
 object HomeScreenRoute
+
+@Serializable
+object SearchScreenRoute
