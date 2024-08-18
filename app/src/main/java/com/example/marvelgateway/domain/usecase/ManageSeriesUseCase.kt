@@ -23,8 +23,9 @@ class ManageSeriesUseCaseImpl @Inject constructor(
         offset: Int?
     ): List<Series> {
         val localSeries = marvelRepository.getLocalSeries()
-        if (localSeries.isNotEmpty()) return localSeries
-        return marvelRepository.getSeries(title, titleStartsWith, limit, offset)
-            .also { marvelRepository.insertSeries(it) }
+        return localSeries.ifEmpty {
+            marvelRepository.getSeries(title, titleStartsWith, limit, offset)
+                .also { marvelRepository.insertSeries(it) }
+        }
     }
 }

@@ -41,6 +41,13 @@ interface ManageCharacterUseCase {
         limit: Int,
         offset: Int
     ): List<Story>
+
+    suspend fun getAllCharacters(
+        name: String? = null,
+        nameStartsWith: String? = null,
+        limit: Int? = null,
+        offset: Int? = null
+    ): List<Character>
 }
 
 class ManageCharacterUseCaseImpl @Inject constructor(
@@ -90,5 +97,18 @@ class ManageCharacterUseCaseImpl @Inject constructor(
         offset: Int
     ): List<Story> {
         return marvelRepository.getCharacterStories(characterId, limit, offset)
+    }
+
+    override suspend fun getAllCharacters(
+        name: String?,
+        nameStartsWith: String?,
+        limit: Int?,
+        offset: Int?
+    ): List<Character> {
+        val localCharacters = marvelRepository.getLocalCharacters()
+        return localCharacters.ifEmpty {
+            marvelRepository.getCharacters(name, nameStartsWith, limit, offset)
+                .also { marvelRepository.insertCharacters(it) }
+        }
     }
 }
