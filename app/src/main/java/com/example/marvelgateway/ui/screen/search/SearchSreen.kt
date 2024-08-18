@@ -25,6 +25,7 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -129,14 +130,33 @@ private fun SearchScreenContent(
             }
             items(uiState.suggestions) { suggestion ->
                 AnimatedVisibility(visible = uiState.showSuggestions) {
-                    Text(
-                        text = suggestion.name,
-                        style = TextStyle(fontSize = 14.sp),
-                        modifier = modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 24.dp, vertical = 8.dp)
-                            .clickable { interactionListener.onSuggestionClicked(suggestion) }
-                    )
+                    Box(
+                        modifier = Modifier
+                            .padding(horizontal = 16.dp)
+                            .clip(shape = RoundedCornerShape(8.dp))
+                            .clickable(onClick = {
+                                interactionListener.onSuggestionClicked(
+                                    suggestion
+                                )
+                            })
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(8.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                        ) {
+                            Text(
+                                text = suggestion.name,
+                                style = TextStyle(fontSize = 14.sp),
+                                modifier = modifier
+                                    .weight(1f)
+                                    .padding(end = 8.dp)
+                            )
+                            Icon(imageVector = Icons.Default.Check, contentDescription = "")
+                        }
+                    }
                 }
             }
             item {

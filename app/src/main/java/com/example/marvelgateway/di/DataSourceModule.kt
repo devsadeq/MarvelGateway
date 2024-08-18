@@ -1,6 +1,8 @@
 package com.example.marvelgateway.di
 
+import com.example.marvelgateway.data.datasource.LocalDataSourceImpl
 import com.example.marvelgateway.data.datasource.RemoteDataSourceImpl
+import com.example.marvelgateway.repository.datasource.LocalDataSource
 import com.example.marvelgateway.repository.datasource.RemoteDataSource
 import dagger.Binds
 import dagger.Module
@@ -15,4 +17,8 @@ abstract class DataSourceModule {
     @Binds
     @Singleton
     abstract fun bindRemoteDataSource(remoteDataSource: RemoteDataSourceImpl): RemoteDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindLocalDataSource(localDataSource: LocalDataSourceImpl): LocalDataSource
 }

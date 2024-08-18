@@ -22,6 +22,9 @@ class ManageEventUseCaseImpl @Inject constructor(
         limit: Int?,
         offset: Int?
     ): List<Event> {
+        val localEvents = marvelRepository.getLocalEvents()
+        if (localEvents.isNotEmpty()) return localEvents
         return marvelRepository.getEvents(title, titleStartsWith, limit, offset)
+            .also { marvelRepository.insertEvents(it) }
     }
 }

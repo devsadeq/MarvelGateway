@@ -6,12 +6,16 @@ import com.example.marvelgateway.domain.entity.Event
 import com.example.marvelgateway.domain.entity.Series
 import com.example.marvelgateway.domain.entity.Story
 import com.example.marvelgateway.domain.repository.MarvelRepository
+import com.example.marvelgateway.repository.datasource.LocalDataSource
 import com.example.marvelgateway.repository.datasource.RemoteDataSource
+import com.example.marvelgateway.repository.mapper.toDomainEntity
 import com.example.marvelgateway.repository.mapper.toEntity
+import com.example.marvelgateway.repository.mapper.toLocalEntity
 import javax.inject.Inject
 
 class MarvelRepositoryImpl @Inject constructor(
-    private val remoteDatasource: RemoteDataSource
+    private val remoteDatasource: RemoteDataSource,
+    private val localDataSource: LocalDataSource,
 ) : MarvelRepository {
     override suspend fun getCharacters(
         name: String?,
@@ -93,5 +97,47 @@ class MarvelRepositoryImpl @Inject constructor(
         offset: Int?
     ): List<Story> {
         return remoteDatasource.getStories(title, titleStartsWith, limit, offset).toEntity()
+    }
+
+    override suspend fun insertCharacters(characters: List<Character>) {
+        localDataSource.insertCharacters(characters.toLocalEntity())
+    }
+
+    override suspend fun insertComics(comics: List<Comic>) {
+        localDataSource.insertComics(comics.toLocalEntity())
+    }
+
+    override suspend fun insertSeries(series: List<Series>) {
+        localDataSource.insertSeries(series.toLocalEntity())
+    }
+
+    override suspend fun insertEvents(events: List<Event>) {
+        localDataSource.insertEvents(events.toLocalEntity())
+    }
+
+    override suspend fun insertStories(stories: List<Story>) {
+        localDataSource.insertStories(stories.toLocalEntity())
+    }
+
+    override suspend fun getLocalCharacters(
+        nameStartsWith: String?,
+    ): List<Character> {
+        return localDataSource.getLocalCharacters().toDomainEntity()
+    }
+
+    override suspend fun getLocalComics(): List<Comic> {
+        return localDataSource.getLocalComics().toDomainEntity()
+    }
+
+    override suspend fun getLocalSeries(): List<Series> {
+        return localDataSource.getLocalSeries().toDomainEntity()
+    }
+
+    override suspend fun getLocalEvents(): List<Event> {
+        return localDataSource.getLocalEvents().toDomainEntity()
+    }
+
+    override suspend fun getLocalStories(): List<Story> {
+        return localDataSource.getLocalStories().toDomainEntity()
     }
 }

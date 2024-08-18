@@ -22,6 +22,9 @@ class ManageStoryUseCaseImpl @Inject constructor(
         limit: Int?,
         offset: Int?
     ): List<Story> {
+        val localStories = marvelRepository.getLocalStories()
+        if (localStories.isNotEmpty()) return localStories
         return marvelRepository.getStories(title, titleStartsWith, limit, offset)
+            .also { marvelRepository.insertStories(it) }
     }
 }

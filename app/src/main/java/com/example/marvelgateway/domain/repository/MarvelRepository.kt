@@ -67,4 +67,26 @@ interface MarvelRepository {
         limit: Int?,
         offset: Int?
     ): List<Story>
+
+    suspend fun insertCharacters(characters: List<Character>)
+
+    suspend fun insertComics(comics: List<Comic>)
+
+    suspend fun insertSeries(series: List<Series>)
+
+    suspend fun insertEvents(events: List<Event>)
+
+    suspend fun insertStories(stories: List<Story>)
+
+    suspend fun getLocalCharacters(
+        nameStartsWith: String? = null,
+    ): List<Character>
+
+    suspend fun getLocalComics(): List<Comic>
+
+    suspend fun getLocalSeries(): List<Series>
+
+    suspend fun getLocalEvents(): List<Event>
+
+    suspend fun getLocalStories(): List<Story>
 }

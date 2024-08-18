@@ -53,6 +53,7 @@ class ManageCharacterUseCaseImpl @Inject constructor(
         offset: Int?
     ): List<Character> {
         return marvelRepository.getCharacters(name, nameStartsWith, limit, offset)
+            .also { marvelRepository.insertCharacters(it) }
     }
 
     override suspend fun getCharacterById(characterId: Int): Character {

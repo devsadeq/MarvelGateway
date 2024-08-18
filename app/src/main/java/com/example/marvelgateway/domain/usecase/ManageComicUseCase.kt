@@ -22,6 +22,9 @@ class ManageComicUseCaseImpl @Inject constructor(
         limit: Int?,
         offset: Int?
     ): List<Comic> {
+        val localComics = marvelRepository.getLocalComics()
+        if (localComics.isNotEmpty()) return localComics
         return marvelRepository.getComics(title, titleStartsWith, limit, offset)
+            .also { marvelRepository.insertComics(it) }
     }
 }
