@@ -14,6 +14,7 @@ room = "2.6.1"
 lifecycleRuntimeComposeAndroid = "2.8.4"
 composeNavigation = "2.8.0-alpha08"
 serialization = "1.6.3"
+coil = "2.7.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -43,6 +44,7 @@ androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = 
 androidx-lifecycle-runtime-compose-android = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose-android", version.ref = "lifecycleRuntimeComposeAndroid" }
 navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "composeNavigation" }
 koltinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serialization" }
+coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 
 
 [plugins]
